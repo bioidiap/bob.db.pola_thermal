@@ -83,7 +83,7 @@ def add_clients_files(session, image_dir, verbose = True):
   annotations_l = [106, 65]
   annotations_r = [106, 140]
 
-  directories = ['Visible/IOD87_B/', 'Visible/IOD87_E/', 'Polarimetric'] # Files with the labels ({image list path},{subject identifier})
+  directories = ['Visible/IOD87_B/', 'Visible/IOD87_E/', 'Polarimetric/'] # Files with the labels ({image list path},{subject identifier})
 
   clients  = {} #Controling the clients and the sessions captured for each client
   file_id_offset = 0
@@ -93,6 +93,7 @@ def add_clients_files(session, image_dir, verbose = True):
     for f in os.listdir(os.path.join(image_dir, d)):
   
       file_name, extension = os.path.splitext(f)
+      file_name = f + file_name
       
       # Adding only PNG
       if extension==".png" and file_name.find("_S1_") < 0 and file_name.find("_S2_") < 0 :

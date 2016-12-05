@@ -6,4 +6,4 @@
  Polarimetric Thermal Database
 ==============================
 
-#.. automodule:: _bob.db.pola_thermal
+.. automodule:: bob.db.pola_thermal

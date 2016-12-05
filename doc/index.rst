@@ -30,10 +30,10 @@ Such variability was introduced by asking the subject to count orally.
 In total there are 960 images for this modality.
 For the **thermal** images there are 4 types of thermal imagery based on the Stokes parameters (:math:`S_0`, :math:`S_1`, :math:`S_2` and :math:`S_3`) commonly used to represent the polarization state.
 The thermal imagery is the following
- - :math:`S_0`: The conventional thermal image 
- - :math:`S_1`
- - :math:`S_2`
- - DoLP: The degree-of-linear-polarization (DoLP) describes the portion of an electromagnetic wave that is linearly polarized, as defined :math:`\frac{sqrt(S_{1}^{2} + S_{2}^{2})}{S_0}`.
+- :math:`S_0`: The conventional thermal image 
+- :math:`S_1`
+- :math:`S_2`
+- DoLP: The degree-of-linear-polarization (DoLP) describes the portion of an electromagnetic wave that is linearly polarized, as defined :math:`\frac{sqrt(S_{1}^{2} + S_{2}^{2})}{S_0}`.
 
 Since :math:`S_3` is very small and usually taken to be zero, the authors of the database decided not to provide this part of the data.
 The same facial expression variability introduced in **VIS** is introduced for **Thermal** images.
@@ -62,6 +62,7 @@ Documentation
  :maxdepth: 2
 
  guide
+ references
  py_api
 
 Indices and tables

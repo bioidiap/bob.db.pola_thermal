@@ -20,27 +20,85 @@
 """A few checks on the protocols of the Near-Infrared and Visible-Light (NIVL) Dataset
 """
 
-import bob.db.nivl
+import bob.db.pola_thermal
 
 """ Defining protocols. Yes, they are static """
-PROTOCOLS = ( 'idiap-comparison_2011-VIS-NIR', \
-              'idiap-comparison_2012-VIS-NIR', \
-              'idiap-search_VIS-NIR_split1', \
-              'idiap-search_VIS-NIR_split2', \
-              'idiap-search_VIS-NIR_split3', \
-              'idiap-search_VIS-NIR_split4', \
-              'idiap-search_VIS-NIR_split5', \
+PROTOCOLS = ( 
+              'VIS-VIS-split1', \
+              'VIS-VIS-split2', \
+              'VIS-VIS-split3', \
+              'VIS-VIS-split4', \
+              'VIS-VIS-split5', \
 
-              'idiap-search_VIS-VIS_split1', \
-              'idiap-search_VIS-VIS_split2', \
-              'idiap-search_VIS-VIS_split3', \
-              'idiap-search_VIS-VIS_split4', \
-              'idiap-search_VIS-VIS_split5', \
-              
-              'original_2011-2012', \
-              'original_2012-2011')
+              'VIS-thermal-overall-split1', \
+              'VIS-thermal-overall-split2', \
+              'VIS-thermal-overall-split3', \
+              'VIS-thermal-overall-split4', \
+              'VIS-thermal-overall-split5', \
 
-GROUPS    = ('world', 'dev', 'eval')
+              'VIS-polarimetric-overall-split1', \
+              'VIS-polarimetric-overall-split2', \
+              'VIS-polarimetric-overall-split3', \
+              'VIS-polarimetric-overall-split4', \
+              'VIS-polarimetric-overall-split5', \
+
+               ########## EXPRESSION
+
+              'VIS-thermal-expression-split1', \
+              'VIS-thermal-expression-split2', \
+              'VIS-thermal-expression-split3', \
+              'VIS-thermal-expression-split4', \
+              'VIS-thermal-expression-split5', \
+
+              'VIS-polarimetric-expression-split1', \
+              'VIS-polarimetric-expression-split2', \
+              'VIS-polarimetric-expression-split3', \
+              'VIS-polarimetric-expression-split4', \
+              'VIS-polarimetric-expression-split5', \
+
+               ########## RANGE 1
+
+              'VIS-thermal-R1-split1', \
+              'VIS-thermal-R1-split2', \
+              'VIS-thermal-R1-split3', \
+              'VIS-thermal-R1-split4', \
+              'VIS-thermal-R1-split5', \
+
+              'VIS-polarimetric-R1-split1', \
+              'VIS-polarimetric-R1-split2', \
+              'VIS-polarimetric-R1-split3', \
+              'VIS-polarimetric-R1-split4', \
+              'VIS-polarimetric-R1-split5', \
+
+               ########## RANGE 2
+
+              'VIS-thermal-R2-split1', \
+              'VIS-thermal-R2-split2', \
+              'VIS-thermal-R2-split3', \
+              'VIS-thermal-R2-split4', \
+              'VIS-thermal-R2-split5', \
+
+              'VIS-polarimetric-R2-split1', \
+              'VIS-polarimetric-R2-split2', \
+              'VIS-polarimetric-R2-split3', \
+              'VIS-polarimetric-R2-split4', \
+              'VIS-polarimetric-R2-split5', \
+
+               ########## RANGE 3
+
+              'VIS-thermal-R3-split1', \
+              'VIS-thermal-R3-split2', \
+              'VIS-thermal-R3-split3', \
+              'VIS-thermal-R3-split4', \
+              'VIS-thermal-R3-split5', \
+
+              'VIS-polarimetric-R3-split1', \
+              'VIS-polarimetric-R3-split2', \
+              'VIS-polarimetric-R3-split3', \
+              'VIS-polarimetric-R3-split4', \
+              'VIS-polarimetric-R3-split5')
+
+GROUPS    = ('world', 'dev')
 
 PURPOSES   = ('train', 'enroll', 'probe')
 
@@ -50,93 +108,68 @@ def test01_protocols_purposes_groups():
 
   #testing protocols
 
-  #possible_protocols = bob.db.nivl.Database().protocols()
-  #for p in possible_protocols:
-    #assert p  in PROTOCOLS
+  possible_protocols = bob.db.pola_thermal.Database().protocols()
+  for p in possible_protocols:
+    assert p  in PROTOCOLS
 
   #testing purposes
-  possible_purposes = bob.db.nivl.Database().purposes()
+  possible_purposes = bob.db.pola_thermal.Database().purposes()
   for p in possible_purposes:
     assert p  in PURPOSES
 
   #testing GROUPS
-  possible_groups = bob.db.nivl.Database().groups()
+  possible_groups = bob.db.pola_thermal.Database().groups()
   for p in possible_groups:
     assert p  in GROUPS
 
 
-def test02_original_protocols():
+def test02_vis_vis():
 
-  original_2011_2012 = {'world':0, 'enroll-eval':1281, 'probe-eval':8987}
-  original_2012_2011 = {'world':0, 'enroll-eval':1051, 'probe-eval':13166}
-
-  #First protocol
-  assert len(bob.db.nivl.Database().objects(protocol='original_2011-2012', groups='world'))                  == original_2011_2012['world']
-  assert len(bob.db.nivl.Database().objects(protocol='original_2011-2012', groups='eval', purposes="enroll")) == original_2011_2012['enroll-eval']
-  assert len(bob.db.nivl.Database().objects(protocol='original_2011-2012', groups='eval', purposes="probe"))  == original_2011_2012['probe-eval']    
-
-  #Second protocol
-  assert len(bob.db.nivl.Database().objects(protocol='original_2012-2011', groups='world'))                  == original_2012_2011['world']
-  assert len(bob.db.nivl.Database().objects(protocol='original_2012-2011', groups='eval', purposes="enroll")) == original_2012_2011['enroll-eval']
-  assert len(bob.db.nivl.Database().objects(protocol='original_2012-2011', groups='eval', purposes="probe"))  == original_2012_2011['probe-eval']    
-
-"""
-def test03_idiap_comparison_protocols():
-
-  idiap_comparison_2011_VIS_NIR = {'world':13780, 'dev-enroll':404, 'dev-probe':6532, 'eval-enroll':62, 'eval-probe':3143}
-  idiap_comparison_2012_VIS_NIR = {'world':13780, 'dev-enroll':276, 'dev-probe':6532, 'eval-enroll':288, 'eval-probe':3143}
-
-  #First protocol
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2011-VIS-NIR', groups='world'))                   == idiap_comparison_2011_VIS_NIR['world']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2011-VIS-NIR', groups='dev', purposes="enroll"))  == idiap_comparison_2011_VIS_NIR['dev-enroll']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2011-VIS-NIR', groups='dev', purposes="probe"))   == idiap_comparison_2011_VIS_NIR['dev-probe']    
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2011-VIS-NIR', groups='eval', purposes="enroll")) == idiap_comparison_2011_VIS_NIR['eval-enroll']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2011-VIS-NIR', groups='eval', purposes="probe"))  == idiap_comparison_2011_VIS_NIR['eval-probe']    
-
-  #Second protocol
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2012-VIS-NIR', groups='world'))                   == idiap_comparison_2012_VIS_NIR['world']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2012-VIS-NIR', groups='dev', purposes="enroll"))  == idiap_comparison_2012_VIS_NIR['dev-enroll']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2012-VIS-NIR', groups='dev', purposes="probe"))   == idiap_comparison_2012_VIS_NIR['dev-probe']    
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2012-VIS-NIR', groups='eval', purposes="enroll")) == idiap_comparison_2012_VIS_NIR['eval-enroll']
-  assert len(bob.db.nivl.Database().objects(protocol='idiap-comparison_2012-VIS-NIR', groups='eval', purposes="probe"))  == idiap_comparison_2012_VIS_NIR['eval-probe']    
-
-"""
-
-def test04_idiap_search_protocols():
-
-  idiap_search_VIS_NIR_splitn = [ {'world':14432, 'dev-enroll':606, 'dev-probe':9108},
-                                  {'world':14966, 'dev-enroll':597, 'dev-probe':8609},
-                                  {'world':14332, 'dev-enroll':622, 'dev-probe':9174},
-                                  {'world':14420, 'dev-enroll':617, 'dev-probe':9112},
-                                  {'world':15243, 'dev-enroll':581, 'dev-probe':8357}
-                                ]
-
-  #Testing first protocol
   for i in range(1,6):
-    protocol = "idiap-search_VIS-NIR_split%s"%i
-    assert len(bob.db.nivl.Database().objects(protocol=protocol, groups='world'))                   == idiap_search_VIS_NIR_splitn[i-1]['world']
-    assert len(bob.db.nivl.Database().objects(protocol=protocol, groups='dev', purposes="enroll"))  == idiap_search_VIS_NIR_splitn[i-1]['dev-enroll']
-    assert len(bob.db.nivl.Database().objects(protocol=protocol, groups='dev', purposes="probe"))   == idiap_search_VIS_NIR_splitn[i-1]['dev-probe']
-
-
-
-def test05_idiap_search_protocols_enroll():
-
-  db = bob.db.nivl.Database()
-
-  #Testing first protocol
-  for i in range(1,6):
-    protocol = "idiap-search_VIS-NIR_split%s"%i
-    clients = db.clients(protocol=protocol, groups='dev')
-    for c in clients:
-      assert len(db.objects(protocol=protocol, groups='dev', purposes="enroll", model_ids=[c])) > 0
+    protocol = 'VIS-VIS-split{0}'.format(i)
+    
+    assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='world')) == 25*16
+    assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='enroll')) == 35*4
+    assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='probe')) == 35*12
   
 
+def test03_vis_overall():
+
+  for p in ['thermal', 'polarimetric']:
+    for i in range(1,6):
+      protocol = "VIS-{0}-overall-split{1}".format(p, i)
+    
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='world')) == 25*16 + 25*48 # VIS + Thermal
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='enroll')) == 35*4 # VIS
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='probe')) == 35*48 # Thermal
+
+
+def test04_vis_expression():
+
+  for p in ['thermal', 'polarimetric']:
+    for i in range(1,6):
+      protocol = "VIS-{0}-expression-split{1}".format(p, i)
+    
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='world')) == 25*16 + 25*48 # VIS + Thermal
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='enroll')) == 35*4 # VIS
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='probe')) == 35*36 # Thermal
+
+
+def test05_vis_ranges():
+
+  for p in ['thermal', 'polarimetric']:
+    for r in ['R1', 'R2', 'R3']:
+      for i in range(1,6):
+        protocol = "VIS-{0}-{1}-split{2}".format(p, r, i)
+    
+        assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='world')) == 25*16 + 25*48 # VIS + Thermal
+        assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='enroll')) == 35*4 # VIS
+        assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='probe')) == 35*16 # Thermal
 
 
 def test06_annotations():
 
-  db = bob.db.nivl.Database()
+  db = bob.db.pola_thermal.Database()
 
   for p in PROTOCOLS:
     for f in db.objects(protocol=p):
@@ -147,31 +180,9 @@ def test06_annotations():
       assert f.annotations()["leye"][1] > 0
 
 
-def test07_search_tobjects():
-  """
-  TODO: Testing only the the first protocol
-  """
-
-  world_VIS_NIR_objs      = 13045
-  world_VIS_NIR_cli       = 344
-  #protocols = bob.db.nivl.Database().protocols()  
-  p = "idiap-search_VIS-NIR_split1"
-  assert len(bob.db.nivl.Database().tobjects(protocol=p))   == world_VIS_NIR_objs 
-  assert len(bob.db.nivl.Database().tclients(protocol=p))   == world_VIS_NIR_cli
-  assert len(bob.db.nivl.Database().tmodel_ids(protocol=p)) == world_VIS_NIR_cli 
-  
-  #for p in protocols:
-  #  if "search" in p:
-  #    assert len(bob.db.nivl.Database().tobjects(protocol=p)) == world
-  #    assert len(bob.db.nivl.Database().tclients(protocol=p)) == world
-  #    assert len(bob.db.nivl.Database().tmodel_ids(protocol=p)) == world
-
-
-
-
 def test08_strings():
   
-  db = bob.db.nivl.Database()
+  db = bob.db.pola_thermal.Database()
 
   for p in PROTOCOLS:
     for g in GROUPS:
@@ -182,6 +193,4 @@ def test08_strings():
           assert f.purpose  == u
           assert f.protocol == p
           assert f.group    == g
-
-
 

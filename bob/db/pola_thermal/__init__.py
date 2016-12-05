@@ -21,7 +21,7 @@
 """
 
 from .query import Database
-from bob.db.nivl.models import File, Client, Annotation, Protocol_File_Association
+from bob.db.pola_thermal.models import File, Client, Annotation, Protocol_File_Association
 
 def get_config():
   """Returns a string containing the configuration information.

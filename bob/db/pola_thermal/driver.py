@@ -18,7 +18,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """
-Commands the Near-Infrared and Visible-Light (NIVL) Dataset can respond to.
+Commands the Polarimetric Thermal Database can respond to.
 """
 
 import os
@@ -80,7 +80,7 @@ def checkfiles(args):
 class Interface(BaseInterface):
 
   def name(self):
-    return 'nivl'
+    return 'pola_thermal'
 
   def version(self):
     import pkg_resources  # part of setuptools
@@ -101,7 +101,7 @@ class Interface(BaseInterface):
     from . import __doc__ as docs
 
     subparsers = self.setup_parser(parser,
-      "Near-Infrared and Visible-Light (NIVL) Dataset", docs)
+      "Polarimetric Thermal Database", docs)
 
     import argparse
     from .query import Database

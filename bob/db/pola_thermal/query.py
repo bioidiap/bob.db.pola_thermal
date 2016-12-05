@@ -79,25 +79,25 @@ class Database(bob.db.base.SQLiteDatabase):
       raise ValueError("Please, select only one of the following protocols {0}".format(protocols))
  
     #Querying
-    query = self.query(bob.db.nivl.File, bob.db.nivl.Protocol_File_Association).join(bob.db.nivl.Protocol_File_Association).join(bob.db.nivl.Client)
+    query = self.query(bob.db.pola_thermal.File, bob.db.pola_thermal.Protocol_File_Association).join(bob.db.pola_thermal.Protocol_File_Association).join(bob.db.pola_thermal.Client)
 
     #filtering
-    query = query.filter(bob.db.nivl.Protocol_File_Association.group.in_(groups))
-    query = query.filter(bob.db.nivl.Protocol_File_Association.protocol.in_(protocols))
-    query = query.filter(bob.db.nivl.Protocol_File_Association.purpose.in_(purposes))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.group.in_(groups))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.protocol.in_(protocols))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.purpose.in_(purposes))
 
     if model_ids is not None and not "probe" in purposes :
       if type(model_ids) is not list and type(model_ids) is not tuple:
         model_ids = [model_ids]
      
       #if you provide a client object as input and not the ids    
-      if type(model_ids[0]) is bob.db.nivl.Client:
+      if type(model_ids[0]) is bob.db.pola_thermal.Client:
         model_aux = []
         for m in model_ids:
           model_aux.append(m.id)
         model_ids = model_aux       
 
-      query = query.filter(bob.db.nivl.Client.id.in_(model_ids))
+      query = query.filter(bob.db.pola_thermal.Client.id.in_(model_ids))
 
     raw_files = query.all()
     files     = []
@@ -116,7 +116,7 @@ class Database(bob.db.base.SQLiteDatabase):
     Get the client object from its ID
     """    
 
-    query = self.query(bob.db.nivl.Client).filter(bob.db.nivl.Client.id == client_id)
+    query = self.query(bob.db.pola_thermal.Client).filter(bob.db.pola_thermal.Client.id == client_id)
     assert len(query.all())==1
     return query.all()[0]
 
@@ -133,11 +133,11 @@ class Database(bob.db.base.SQLiteDatabase):
       raise ValueError("Please, select only one of the following protocols {0}".format(protocols))
  
     #Querying
-    query = self.query(bob.db.nivl.Client).join(bob.db.nivl.File).join(bob.db.nivl.Protocol_File_Association)
+    query = self.query(bob.db.pola_thermal.Client).join(bob.db.pola_thermal.File).join(bob.db.pola_thermal.Protocol_File_Association)
 
     #filtering
-    query = query.filter(bob.db.nivl.Protocol_File_Association.group.in_(groups))
-    query = query.filter(bob.db.nivl.Protocol_File_Association.protocol.in_(protocols))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.group.in_(groups))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.protocol.in_(protocols))
 
     return [c.id for c in query.all()]
 
@@ -159,62 +159,11 @@ class Database(bob.db.base.SQLiteDatabase):
       raise ValueError("Please, select only one of the following protocols {0}".format(protocols))
  
     #Querying
-    query = self.query(bob.db.nivl.Client).join(bob.db.nivl.File).join(bob.db.nivl.Protocol_File_Association)
+    query = self.query(bob.db.pola_thermal.Client).join(bob.db.pola_thermal.File).join(bob.db.pola_thermal.Protocol_File_Association)
 
     #filtering
-    query = query.filter(bob.db.nivl.Protocol_File_Association.group.in_(groups))
-    query = query.filter(bob.db.nivl.Protocol_File_Association.protocol.in_(protocols))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.group.in_(groups))
+    query = query.filter(bob.db.pola_thermal.Protocol_File_Association.protocol.in_(protocols))
 
     return query.all()
-
-
-
-  ####### score normalization methods
-
-  def zclients(self, protocol=None):
-    """Returns a set of Z-Norm clients for the specific query by the user."""    
-    return self.clients(protocol=protocol, groups="world")
-
-  def tclients(self, protocol=None):
-    """Returns a set of T-Norm clients for the specific query by the user."""    
-    return self.zclients(protocol=protocol)
-
-
-  def zobjects(self, protocol=None, groups=None):
-    """Returns a set of Z-Norm objects for the specific query by the user.""" 
-
-    #Checking inputs
-    protocols = self.check_parameters_for_validity(protocol, "protocol", PROTOCOLS) 
-
-    #You need to select only one protocol
-    if (len(protocols) > 1):
-      raise ValueError("Please, select only one of the following protocols {0}".format(protocols))
- 
-    #Querying
-    query = self.query(bob.db.nivl.File).join(bob.db.nivl.Protocol_File_Association)
-
-    #filtering
-    query = query.filter(bob.db.nivl.Protocol_File_Association.protocol.in_(protocols))
-    query = query.filter(bob.db.nivl.Protocol_File_Association.group == "world")
-    
-    ###### THE MOST IMPORTANT THING IN THE METHOD
-    ### IF THE PROTOCOL IS   PHOTO --> SKETCH, THE T-OBJECTS ARE PHOTOS
-    ### IF THE PROTOCOL IS   SKETCH --> PHOTO, THE T-OBJECTS ARE SKETCHES 
-    if "p2s" in protocol:
-      query = query.filter(bob.db.nivl.File.modality == "VIS")
-    else:
-      query = query.filter(bob.db.nivl.File.modality == "NIR")
-
-    return query.all()
-
-
-  def tobjects(self, protocol=None, model_ids=None, groups=None):
-    """Returns a set of T-Norm objects for the specific query by the user.""" 
-    return self.zobjects(protocol=protocol)
-
-
-
-  def tmodel_ids(self, groups = None, protocol = None, **kwargs):
-    """This function returns the ids of the T-Norm models of the given groups for the given protocol."""
-    return ["t_"+str(c.id) for c in self.tclients(protocol=protocol)]
 

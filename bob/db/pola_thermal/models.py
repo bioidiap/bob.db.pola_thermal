@@ -35,7 +35,14 @@ import os
 Base = declarative_base()
 
 """ Defining protocols. Yes, they are static """
-PROTOCOLS = ( 'VIS-thermal-overall-split1', \
+PROTOCOLS = ( 
+              'VIS-VIS-split1', \
+              'VIS-VIS-split2', \
+              'VIS-VIS-split3', \
+              'VIS-VIS-split4', \
+              'VIS-VIS-split5', \
+
+              'VIS-thermal-overall-split1', \
               'VIS-thermal-overall-split2', \
               'VIS-thermal-overall-split3', \
               'VIS-thermal-overall-split4', \
@@ -164,7 +171,7 @@ class File(Base,  bob.db.base.File):
   __tablename__ = 'file'
 
   modality_choices = ('VIS', 'THERMAL')
-  polarization_choices = ('VIS', 'S0', 'S1', 'S2')
+  polarization_choices = ('VIS', 'S0', 'S1', 'S2', 'DP')
 
   id        = Column(Integer, primary_key=True)
   path      = Column(String(100), unique=True)

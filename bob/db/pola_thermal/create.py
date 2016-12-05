@@ -93,7 +93,6 @@ def add_clients_files(session, image_dir, verbose = True):
     for f in os.listdir(os.path.join(image_dir, d)):
   
       file_name, extension = os.path.splitext(f)
-      file_name = f + file_name
       
       # Adding only PNG
       if extension==".png" and file_name.find("_S1_") < 0 and file_name.find("_S2_") < 0 :
@@ -105,6 +104,7 @@ def add_clients_files(session, image_dir, verbose = True):
           if verbose>=1: print("  Adding client {0}".format(client))
           session.add(Client(id=client))
 
+        file_name = d + file_name
         if verbose>=1: print("  Adding file {0}".format(file_name))
         file_id_offset += 1
         f = File(file_id=file_id_offset,

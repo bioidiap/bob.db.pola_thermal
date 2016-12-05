@@ -25,9 +25,9 @@ install_requires = load_requirements()
 setup(
 
     name='bob.db.pola_thermal',
-    version='0.0.0a1',
+    version=open("version.txt").read().rstrip(),
     description='Polarimetric Thermal Database',
-    url='',
+    url='https://gitlab.idiap.ch/bob/bob.db.pola_thermal',
     license='BSD',
     keywords = "",
     author='Tiago de Freitas Pereira',
@@ -48,7 +48,7 @@ setup(
     entry_points = {
       # declare database to bob
       'bob.db': [
-        'nivl = bob.db.pola_thermal.driver:Interface',
+        'pola_thermal = bob.db.pola_thermal.driver:Interface',
       ],
       
       # scripts should be declared using this entry:

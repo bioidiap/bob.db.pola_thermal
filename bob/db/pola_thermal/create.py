@@ -80,8 +80,8 @@ def add_clients_files(session, image_dir, verbose = True):
   
   """
 
-  annotations_l = [106, 65]
-  annotations_r = [106, 140]
+  annotations_r = [65, 106]
+  annotations_l = [140, 106]
 
   directories = ['Visible/IOD87_B/', 'Visible/IOD87_E/', 'Polarimetric/'] # Files with the labels ({image list path},{subject identifier})
 

@@ -14,16 +14,14 @@
    :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal
 .. image:: http://img.shields.io/pypi/v/bob.db.pola_thermal.png
    :target: https://pypi.python.org/pypi/bob.db.pola_thermal
-.. image:: http://img.shields.io/pypi/dm/bob.db.cuhk_cufs.png
-   :target: https://pypi.python.org/pypi/bob.db.pola_thermal
 
 
 =============================
 Polarimetric Thermal Database
 =============================
 
-This package contains the access API and descriptions for the `Polarimetric Thermal Database`. 
-The actual raw data for the database should be requested from US Army. 
+This package contains the access API and descriptions for the `Polarimetric Thermal Database`.
+The actual raw data for the database should be requested from US Army.
 This package only contains the Bob accessor methods to use the DB directly from python, with the original protocol of the database.
 
 The Polarimetrical Thermal Database is for research on VIS-Thermal face recognition.

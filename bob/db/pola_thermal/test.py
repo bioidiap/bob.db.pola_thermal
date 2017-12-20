@@ -142,6 +142,10 @@ def test03_vis_overall():
       assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='world')) == 25*16 + 25*48 # VIS + Thermal
       assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='enroll')) == 35*4 # VIS
       assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups='dev', purposes='probe')) == 35*48 # Thermal
+      
+      # Checking the modalities
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups="world", modality=["VIS"])) == 25*16
+      assert len(bob.db.pola_thermal.Database().objects(protocol=protocol, groups="world", modality=["THERMAL"])) == 25*48
 
 
 def test04_vis_expression():

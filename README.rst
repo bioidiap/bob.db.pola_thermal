@@ -4,12 +4,12 @@
 
 
 
-.. image:: http://img.shields.io/badge/docs-stable-yellow.png
-   :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.pola_thermal/stable/index.html
+.. image:: http://img.shields.io/badge/docs-v1.0.2-yellow.png
+   :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.pola_thermal/v1.0.2/index.html
 .. image:: http://img.shields.io/badge/docs-latest-orange.png
    :target: http://beatubulatest.lab.idiap.ch/private/docs/bob/bob.db.pola_thermal/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob.db.cuhk_cufs/badges/master/build.svg
-   :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob.db.cuhk_cufs/badges/v1.0.2/build.svg
+   :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/commits/v1.0.2
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal
 .. image:: http://img.shields.io/pypi/v/bob.db.pola_thermal.png

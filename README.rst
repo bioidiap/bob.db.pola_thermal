@@ -4,16 +4,14 @@
 
 
 
-.. image:: http://img.shields.io/badge/docs-stable-yellow.png
-   :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.pola_thermal/stable/index.html
-.. image:: http://img.shields.io/badge/docs-latest-orange.png
-   :target: http://beatubulatest.lab.idiap.ch/private/docs/bob/bob.db.pola_thermal/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob.db.cuhk_cufs/badges/master/build.svg
+.. image:: https://img.shields.io/badge/docs-available-orage.svg
+   :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.pola_thermal/master/index.html
+.. image:: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/badges/master/pipeline.svg
+   :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/badges/master/coverage.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal
-.. image:: http://img.shields.io/pypi/v/bob.db.pola_thermal.png
-   :target: https://pypi.python.org/pypi/bob.db.pola_thermal
 
 
 =============================

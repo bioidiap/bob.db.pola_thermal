@@ -4,7 +4,7 @@
 
 
 
-.. image:: https://img.shields.io/badge/docs-available-orage.svg
+.. image:: https://img.shields.io/badge/docs-available-orange.svg
    :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.pola_thermal/master/index.html
 .. image:: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/badges/master/pipeline.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.pola_thermal/commits/master
